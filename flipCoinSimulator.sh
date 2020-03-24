@@ -23,3 +23,4 @@ headpercent=$(($(($Headsoccure * $x))/$number))
 tailpercent=$(($(($Tailsoccure * $x))/$number))
 echo headpercent=$headpercent
 echo tailpercent=$tailpercent
+
