@@ -1,10 +1,24 @@
 #Flip the Coin to Display Heads or Tails
-echo press enter to flip the coin
-read
-Flip=$(( $RANDOM%2 ))
-if [ $Flip -eq 1 ]
-then
-	echo Heads
-else
-	echo Tails
-fi
+#declare -A Singlet
+echo enter value how many times to iterate the loop
+read number
+declare -A HashMap
+HashMap[head]=0;
+HashMap[tail]=0;
+for (( i=0; i<$number; i++ ))
+
+do
+	Flip=$(( $RANDOM%2 ))
+	if [ $Flip -eq 1 ]
+	then
+		 HashMap[head]=$(((${HashMap[head]})+1));
+	else
+		 HashMap[tail]=$(((${HashMap[tail]})+1));
+	fi
+done
+echo Heads occure ${HashMap[head]};
+echo Tails occure ${HashMap[tail]};
+HeadPercentage=$((((${HashMap[head]}*100)/10)))
+TailPercentage=$((((${HashMap[tail]}*100)/10)))
+echo $HeadPercentage
+echo $TailPercentage
