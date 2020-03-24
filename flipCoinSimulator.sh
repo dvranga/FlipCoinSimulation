@@ -16,9 +16,10 @@ do
 		 HashMap[tail]=$(((${HashMap[tail]})+1));
 	fi
 done
-echo Heads occure ${HashMap[head]};
-echo Tails occure ${HashMap[tail]};
-HeadPercentage=$((((${HashMap[head]}*100)/10)))
-TailPercentage=$((((${HashMap[tail]}*100)/10)))
-echo $HeadPercentage
-echo $TailPercentage
+Headsoccure=${HashMap[head]};
+Tailsoccure=${HashMap[tail]};
+x=100
+headpercent=$(($(($Headsoccure * $x))/$number))
+tailpercent=$(($(($Tailsoccure * $x))/$number))
+echo headpercent=$headpercent
+echo tailpercent=$tailpercent
