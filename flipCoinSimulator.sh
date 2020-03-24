@@ -1,78 +1,106 @@
-#Flip the Coin to Display Heads or Tails
+#Flip the Coin to Display Hs or Ts
 #declare -A Singlet
 echo enter value how many times to iterate the loop
 read number
-declare -A HashMap
-HashMap[headheadhead]=0;
-HashMap[tailtailtail]=0
-HashMap[headheadtail]=0;
-HashMap[headtailhead]=0;
-HashMap[tailheadhead]=0;
-HashMap[tailheadtail]=0
-HashMap[tailtailhead]=0;
-HashMap[headtailtail]=0;
+declare -A Singlet
+echo SingletCombination
+echo
+Singlet[Heads]=0;
+Singlet[Tails]=0;
+for (( i=0; i<$number; i++ ))
+
+do
+	Flip=$(( $RANDOM%2 ))
+	if [ $Flip -eq 1 ]
+	then
+		 Singlet[Heads]=$(((${Singlet[Heads]})+1));
+	else
+		 Singlet[Tails]=$(((${Singlet[Tails]})+1));
+	fi
+done
+for key in ${!Singlet[@]}
+do
+	Singlet[$key]=$(( (${Singlet[$key]} * 100) / $number));
+	echo "$key:${Singlet[$key]}"
+done
+
+echo DoubletCombination
+echo
+declare -A Doublet
+Doublet[HH]=0;
+Doublet[TH]=0
+Doublet[HT]=0;
+Doublet[TT]=0;
+for (( i=0; i<$number; i++ ))
+
+do
+	Flip=$(( $RANDOM%4 ))
+	if [ $Flip -eq 0 ]
+	then
+		 Doublet[HH]=$(((${Doublet[HH]})+1));
+	elif [ $Flip -eq 1 ]
+	then
+		Doublet[HT]=$(((${Doublet[HT]})+1));
+	elif [ $Flip -eq 2 ]
+	then
+		Doublet[TH]=$(((${Doublet[TH]})+1));
+	else
+		 Triplet[TT]=$(((${Doublet[TT]})+1));
+	fi
+done
+for key in ${!Doublet[@]}
+do
+	Doublet[$key]=$(( (${Doublet[$key]} * 100) / $number));
+	echo "$key:${Doublet[$key]}"
+done
+
+echo TripletCombination
+declare -A Triplet
+Triplet[HHH]=0;
+Triplet[TTT]=0
+Triplet[HHT]=0;
+Triplet[HTH]=0;
+Triplet[THH]=0;
+Triplet[THT]=0
+Triplet[TTH]=0;
+Triplet[HTT]=0;
 for (( i=0; i<$number; i++ ))
 
 do
 	Flip=$(( $RANDOM%8 ))
 	if [ $Flip -eq 0 ]
 	then
-		 HashMap[headheadhead]=$(((${HashMap[headheadhead]})+1));
+		 Triplet[HHH]=$(((${Triplet[HHH]})+1));
 	elif [ $Flip -eq 1 ]
 	then
-		HashMap[tailtailtail]=$(((${HashMap[tailtailtail]})+1));
+		Triplet[TTT]=$(((${Triplet[TTT]})+1));
 	elif [ $Flip -eq 2 ]
 	then
-		HashMap[headheadtail]=$(((${HashMap[headheadtail]})+1));
+		Triplet[HHT]=$(((${Triplet[HHT]})+1));
 	elif [ $Flip -eq 3 ]
 	then
-		 HashMap[headtailhead]=$(((${HashMap[headtailhead]})+1));
+		 Triplet[HTH]=$(((${Triplet[HTH]})+1));
 	elif [ $Flip -eq 4 ]
 	then
-		 HashMap[tailheadhead]=$(((${HashMap[tailheadhead]})+1));
+		 Triplet[THH]=$(((${Triplet[THH]})+1));
 	elif [ $Flip -eq 5 ]
 	then
-		HashMap[tailheadtail]=$(((${HashMap[tailheadtail]})+1));
+		Triplet[THT]=$(((${Triplet[THT]})+1));
 	elif [ $Flip -eq 6 ]
 	then
-		HashMap[tailtailhead]=$(((${HashMap[tailtailhead]})+1));
+		Triplet[TTH]=$(((${Triplet[TTH]})+1));
 	else
-		 HashMap[headtailtail]=$(((${HashMap[headtailtail]})+1));
+		 Triplet[HTT]=$(((${Triplet[HTT]})+1));
 	fi
 done
-HeadHeadHeadoccure=${HashMap[headheadhead]};
-TailTailTailoccure=${HashMap[tailtailtail]};
-HeadHeadTailoccure=${HashMap[headheadtail]};
-HeadTailHeadoccure=${HashMap[headtailhead]};
-TailHeadHeadoccure=${HashMap[tailheadhead]};
-TailHeadTailoccure=${HashMap[tailheadtail]};
-TailTailHeadoccure=${HashMap[tailtailhead]};
-HeadTailTailoccure=${HashMap[headtailtail]};
 
-echo HeadHeadHeadoccure=${HashMap[headheadhead]};
-echo TailTailTailoccure=${HashMap[tailtailtail]};
-echo HeadHeadTailoccure=${HashMap[headheadtail]};
-echo HeadTailHeadoccure=${HashMap[headtailhead]};
-echo TailHeadHeadoccure=${HashMap[tailheadhead]};
-echo TailHeadTailoccure=${HashMap[tailheadtail]};
-echo TailTailHeadoccure=${HashMap[tailtailhead]};
-echo HeadTailTailoccure=${HashMap[headtailtail]};
-x=100
-headheadheadpercent=$(($(($HeadHeadHeadoccure * $x))/$number))
-tailtailtailpercent=$(($(($TailTailTailoccure * $x))/$number))
-headheadtailpercent=$(($(($HeadHeadTailoccure * $x))/$number))
-headtailheadpercent=$(($(($HeadTailHeadoccure * $x))/$number))
-tailheadheadpercent=$(($(($TailHeadHeadoccure * $x))/$number))
-tailheadtailpercent=$(($(($TailHeadTailoccure * $x))/$number))
-tailtailheadpercent=$(($(($TailTailHeadoccure * $x))/$number))
-headtailtailpercent=$(($(($HeadTailTailoccure * $x))/$number))
-echo headheadheadpercent=$headheadheadpercent
-echo tailtailtailpercent=$tailtailtailpercent
-echo headheadtailpercent=$headheadtailpercent
-echo headtailheadpercent=$headtailheadpercent
-echo tailheadheadpercent=$tailheadheadpercent
-echo tailheadtailpercent=$tailheadtailpercent
-echo tailtailheadpercent=$tailtailheadpercent
-echo headtailtailpercent=$headtailtailpercent
-
-
+for key in ${!Triplet[@]}
+do
+	Triplet[$key]=$(( (${Triplet[$key]} * 100) / $number));
+	echo "$key:${Triplet[$key]}"
+done
+array=($(for value in ${Triplet[@]}
+do
+	echo ${Triplet[$value]}
+done | sort ))
+echo ${array[@]}
