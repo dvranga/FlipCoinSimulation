@@ -18,10 +18,33 @@ do
 		 Singlet[Tails]=$(((${Singlet[Tails]})+1));
 	fi
 done
+count=1;
 for key in ${!Singlet[@]}
 do
 	Singlet[$key]=$(( (${Singlet[$key]} * 100) / $number));
-	echo "$key:${Singlet[$key]}"
+	abc[count++]=${Singlet[$key]}
+	echo $key:${Singlet[$key]}
+done
+for (( i = 1; i < 3 ; i++ ))
+do
+   for (( j = $i; j < 3; j++ ))
+   do
+      if [ ${abc[$i]} -gt ${abc[$j]} ]; then
+           t=${abc[$i]}
+           abc[$i]=${abc[$j]}
+           abc[$j]=$t
+     fi
+   done
+done
+echo ${abc[@]}
+max=${abc[2]}
+for key in ${!Singlet[@]}
+do
+if [ ${Singlet[$key]} -eq $max ]
+then
+echo "winning Combination is $key"
+break
+fi
 done
 
 echo DoubletCombination
@@ -45,16 +68,43 @@ do
 	then
 		Doublet[TH]=$(((${Doublet[TH]})+1));
 	else
-		 Triplet[TT]=$(((${Doublet[TT]})+1));
+		 Doublet[TT]=$(((${Doublet[TT]})+1));
 	fi
 done
+count=1;
 for key in ${!Doublet[@]}
 do
 	Doublet[$key]=$(( (${Doublet[$key]} * 100) / $number));
+	abc[count++]=${Doublet[$key]}
 	echo "$key:${Doublet[$key]}"
 done
 
+for (( i = 1; i < 5 ; i++ ))
+do
+   for (( j = $i; j < 5; j++ ))
+   do
+      if [ ${abc[$i]} -gt ${abc[$j]} ]; then
+           t=${abc[$i]}
+           abc[$i]=${abc[$j]}
+           abc[$j]=$t
+     fi
+   done
+done
+echo ${abc[@]}
+max=${abc[4]}
+for key in ${!Doublet[@]}
+do
+if [ ${Doublet[$key]} -eq $max ]
+then
+echo "winning Combination is $key"
+break
+fi
+done
+
+
 echo TripletCombination
+echo
+
 declare -A Triplet
 Triplet[HHH]=0;
 Triplet[TTT]=0
@@ -93,14 +143,32 @@ do
 		 Triplet[HTT]=$(((${Triplet[HTT]})+1));
 	fi
 done
-
+count=1;
 for key in ${!Triplet[@]}
 do
 	Triplet[$key]=$(( (${Triplet[$key]} * 100) / $number));
+	abc[count++]=${Triplet[$key]}
 	echo "$key:${Triplet[$key]}"
 done
-array=($(for value in ${Triplet[@]}
+
+for (( i = 1; i < 9 ; i++ ))
 do
-	echo ${Triplet[$value]}
-done | sort ))
-echo ${array[@]}
+   for (( j = $i; j < 9; j++ ))
+   do
+      if [ ${abc[$i]} -gt ${abc[$j]} ]; then
+           t=${abc[$i]}
+           abc[$i]=${abc[$j]}
+           abc[$j]=$t
+     fi
+   done
+done
+echo ${abc[@]}
+max=${abc[8]}
+for key in ${!Triplet[@]}
+do
+if [ ${Triplet[$key]} -eq $max ]
+then
+echo "winning Combination is $key"
+break
+fi
+done
